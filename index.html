@@ -1,22 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday!</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>🎂 Happy Birthday My Love 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffeaf4;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+    }
+    .banner {
+      text-align: center;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      padding: 20px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .cake-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .cake {
+      position: relative;
+      width: 200px;
+      height: 150px;
+    }
+    .cake div {
+      border-radius: 20px;
+    }
+    .top {
+      height: 30px;
+      background: #ffc6e3;
+    }
+    .middle {
+      height: 40px;
+      background: #ff9ecf;
+      margin-top: 5px;
+    }
+    .bottom {
+      height: 50px;
+      background: #ff69b4;
+      margin-top: 5px;
+    }
+    .candles {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+    .candles div {
+      width: 10px;
+      height: 30px;
+      background: #fff;
+      border-radius: 5px;
+      position: relative;
+    }
+    .flame {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 15px;
+      background: radial-gradient(ellipse at center, #ffdd55 0%, #ff9900 70%, transparent 100%);
+      border-radius: 50% 50% 0 0;
+      animation: flicker 1s infinite;
+    }
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scaleY(1); }
+      50% { transform: translateX(-50%) scaleY(1.2); }
+      100% { transform: translateX(-50%) scaleY(1); }
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
 </head>
 <body>
-  <h1>Happy Birthday, Love! 🎂</h1>
-  <div class="cake">
-    <div class="layer"></div>
-    <div class="candles">
-      <div class="flame" id="flame1"></div>
-      <div class="flame" id="flame2"></div>
-      <div class="flame" id="flame3"></div>
+  <div class="banner">🎉 Happy Birthday to the Sweetest Person Ever! 🎉</div>
+  <div class="cake-container">
+    <div class="cake">
+      <div class="top"></div>
+      <div class="middle"></div>
+      <div class="bottom"></div>
+      <div class="candles">
+        <div class="flame" id="flame1"></div>
+        <div class="flame" id="flame2"></div>
+        <div class="flame" id="flame3"></div>
+      </div>
     </div>
   </div>
-  <p>Blow into your mic to blow out the candles! 🎤</p>
-  <script src="script.js"></script>
+  <canvas id="sparkleCanvas"></canvas>
+  <script>
+    // 🎇 Sparkle Animation
+    const canvas = document.getElementById('sparkleCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const sparkles = [];
+    function createSparkle() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        alpha: Math.random(),
+        speed: Math.random() * 0.5 + 0.2
+      };
+    }
+    for (let i = 0; i < 200; i++) sparkles.push(createSparkle());
+
+    function animateSparkles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      sparkles.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, 2 * Math.PI);
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+        ctx.fill();
+        s.y -= s.speed;
+        if (s.y < 0) s.y = canvas.height;
+      });
+      requestAnimationFrame(animateSparkles);
+    }
+    animateSparkles();
+  </script>
 </body>
 </html>
