@@ -1,0 +1,50 @@
+body {
+  background: linear-gradient(to top, #fff0f5, #e6e6fa);
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+  padding: 50px;
+}
+
+h1 {
+  color: #ff69b4;
+  font-size: 2.5rem;
+}
+
+.cake {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  background: pink;
+  margin: 40px auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.layer {
+  height: 50px;
+  background: #ffe4e1;
+  border-radius: 0 0 10px 10px;
+}
+
+.candles {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+}
+
+.flame {
+  width: 10px;
+  height: 20px;
+  background: orange;
+  border-radius: 50%;
+  animation: flicker 0.4s infinite;
+}
+
+@keyframes flicker {
+  0% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(1.2); opacity: 0.8; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
